@@ -8,7 +8,9 @@
  * @package Bright Core
  */
 
-require_once(br()->atFrameworkPath('3rdparty/mustache/Mustache.php'));
+require_once(dirname(__DIR__) . '/vendor/autoload.php');
+
+// require_once(br()->atFrameworkPath('3rdparty/mustache/Mustache.php'));
 
 // require_once(br()->atFrameworkPath('3rdparty/mustache/php/bobthecow/src/Mustache/Autoloader.php'));
 // Mustache_Autoloader::register();
@@ -93,11 +95,11 @@ class BrGenericRenderer extends BrObject {
       $localVars['authorized'] = true;
     }
 
-    $m = new Mustache(null, null, null, array('delimiters' => br($this->params, 'delimiters', '[[ ]]')));
-    $body = $m->render($body, $localVars);
-
-    // $m = new Mustache_Engine;
+    // $m = new Mustache(null, null, null, array('delimiters' => br($this->params, 'delimiters', '[[ ]]')));
     // $body = $m->render($body, $localVars);
+
+    $m = new Mustache_Engine(array('delimiters' => br($this->params, 'delimiters', '[[ ]]')));
+    $body = $m->render($body, $localVars);
 
     // $m = new Handlebars\Handlebars;
     // $body = $m->render($body, $localVars);
